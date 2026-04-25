@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Loading</title>
+    <style>
+      body {
+        background-color: lightgrey;
+        margin: 0;
+        display: grid;
+        place-items: center; /*makes content inside grid in center*/
+        place-content: center; /*this is needed to place things in center because it makes the grid in center so as to keep your wish*/
+        min-height: 100vh;
+      }
+      /* body{
+        background:lightgrey;
+        margin:0;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height:100vh;
+      } */
+      .load {
+        position: relative; /*only used so it could have absolute position things*/
+        height: 300px;
+        width: 300px;
+        /*flex-direction:row/columns "no 's' it is singular"*/
+      }
+      .front {
+        position: absolute;
+        background: lightgrey;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        border-radius: 200px;
+      }
+      .back {
+        position: absolute;
+        top: -30px;
+        left: -30px;
+        right: -30px;
+        bottom: -30px;
+        border-radius: 200px;
+        z-index: 1;
+        /* background: conic-gradient(from 0deg at 50% 50%, red, blue); */
+        background: conic-gradient(from var(--abcd) at 50% 50%, red, blue);
+        /*var is importnat as it takes out the value from the --abcd var=variable*/
+        animation: abcd 2s linear infinite;
+        /*ease in/ease out/ ease/linear*/
+        box-shadow:0 0 20px 10px rgba(106, 0, 255, 0.8);
+        filter:blur(10px);
+      }
+      @property --abcd {
+        /*the -- is a Prefix used to tell the browser that it is not anythings standart and is just some variable made by user*/
+
+        syntax: "<angle>";
+        initial-value: 0deg; /*so if the website fales to load this can be backup*/
+        inherits: false; /*tell that these things will not be applied to the child elements or contents*/
+      }
+      @keyframes abcd {
+        from {
+          --abcd: 0deg;
+        }
+        to {
+          --abcd: 360deg;
+        }
+
+        /* 0% {
+          background: conic-gradient(from 0deg at 50% 50%, red, blue);
+        }
+        25% {
+          background: conic-gradient(from 90deg, red, blue);
+        }
+        50% {
+          background: conic-gradient(from 180deg, red, blue);
+        }
+        75% {
+          background: conic-gradient(from 270deg, red, blue);
+        }
+        100% {
+          background: conic-gradient(from 360deg at 50% 50%, red, blue);
+        } */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="load">
+      <div class="front"></div>
+      <div class="back"></div>
+    </div>
+  </body>
+</html>
