@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Famous Buttons</title>
+    <style>
+      button.subscribe {
+        /* you can use only .subscribe if you want to */
+        background-color: rgb(192, 1, 1);
+        color: white;
+        border: none;
+        border-radius: 3px;
+        width: 100px;
+        height: 30px;
+        font-size: 13px;
+        cursor: pointer; /* very important please learn it... */
+        margin-right: 10px;
+        transition:
+          opacity 0.4s,
+          color 0.3s;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 6px;
+        padding-right: 6px;
+        vertical-align: top; /*importnat*/
+        letter-spacing: 0.3px; /*importnat things*/
+      }
+      .subscribe:hover {
+        opacity: 0.6; /*importnat takes value betweeen 1 and 0*/
+      }
+      .subscribe:active {
+        /*importnat*/
+        background-color: rgb(255, 169, 169);
+        color: red;
+        opacity: 1;
+        border: ridge;
+        font-weight: bold;
+        border-color: red;
+        border-width: 3px;
+      }
+      /* we can use border to mark all the things: width style color;vales of 
+      style are : none solid dotted dashed double groove outset ridge inset*/
+      .join {
+        width: 70px;
+        height: 30px;
+        font-size: 13px;
+        border-color: blue;
+        border-style: solid; /*important*/
+        border-width: 2px;
+        border-radius: 4px;
+        color: blue;
+        background-color: white;
+        cursor: pointer;
+        transition:
+          opacity 0.4s,
+          color 0.5s,
+          background-color 1s;
+        vertical-align: top;
+        letter-spacing: 0.5px; /*importnat*/
+      }
+      /* keeping transition attribute in the .join instead of hover or active is good as it is now allowed to keep the transition both side while activation it and deactivating it.while in hover or active it is only able to apply it while it is under that condition...*/
+      .join:hover {
+        color: white;
+        background-color: blue;
+      }
+      .join:active {
+        opacity: 0.7;
+      }
+      .tweet {
+        background-color: rgb(0, 154, 243);
+        height: 30px;
+        width: 60px;
+        border-radius: 15px;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: bold; /*importnat*/
+        transition:
+          box-shadow 0.5s,
+          color 0.5s;
+        vertical-align: top;
+      }
+      .tweet:hover {
+        box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.3);
+        /*shadow is a important porperty learn it. box-shadow:[horizontal(px), vertical(px), blur(px, color]. In rgba the 'a' means opacity values between[0 and 1] */
+      }
+      .tweet:active {
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="subscribe">SUBSCRIBE</button>
+    <button class="join">JOIN</button>
+    <button class="tweet">Tweet</button>
+  </body>
+</html>

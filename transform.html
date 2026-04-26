@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <meta ch="UTF-8" />
+  <head>
+    <title>Transform</title>
+    <style>
+      body {
+        display: grid;
+        margin: 0;
+        height: 100vh; /*vh is viewport height*/
+        justify-content: center;
+        align-items: center;
+      }
+      .box,.box1,.box2{
+        background: radial-gradient(
+          farthest-corner at 20% 50%,
+          var(--1) 20%,
+          var(--2) 70%
+        );
+        width: 300px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation:
+          radiall 8s ease-in-out infinite,
+          abcd 3s linear infinite;
+        /*transition:transform 3s ease 0s ;//last value is for the time takes to start the process*/
+        transform: rotate(0deg);
+        border: 2px solid blue;
+        border-radius: 100px;
+      }
+      @keyframes abcd {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @property --1 {
+        syntax: "<color>";
+        initial-value: rgb(255, 99, 122);
+        inherits: false;
+      }
+      @property --2 {
+        syntax: "<color>";
+        initial-value: rgb(0, 191, 255);
+        inherits: false;
+      }
+      @keyframes radiall {
+        /* from{
+          --1:rgb(255, 99, 122);
+          --2:rgb(0, 191, 255);
+        }
+        to{
+          --1:rgb(0, 191, 255);
+          --2:rgb(255, 99, 122);
+        } */
+        0% {
+          --1: rgb(255, 99, 122);
+          --2: rgb(0, 191, 255);
+        }
+        50% {
+          --1: rgb(0, 191, 255);
+          --2: rgb(255, 99, 122);
+        }
+        100% {
+          --1: rgb(255, 99, 122);
+          --2: rgb(0, 191, 255);
+        }
+      }
+      .text {
+        font-size: 30px;
+        font-weight: bolder;
+        font-family: sans-serif;
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        background: linear-gradient(190deg, red, blue 90%);
+        background-clip: text;
+        -webkit-background-clip: text; /*to work on all browsers*/
+        animation: textcolor 5s ease infinite;
+      }
+      @keyframes textcolor {
+        from {
+          filter: hue-rotate(0deg);
+        }
+        to {
+          filter: hue-rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <span class="text"> Hello Everyone</span>
+    </div>
+    <div class="box1"></div>
+    <div class="box2"></div>
+  </body>
+</html>

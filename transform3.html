@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Why you want to read this... go away!" />
+    <link rel="icon" type="image/png" href="BSlogo.png" />
+    <!-- href= Hypertext Reference -->
+    <link rel="stylesheet" href="transform3.css" />
+    <title>Transformation</title>
+    <style>
+      html {
+        scroll-behavior: smooth;
+        /* important */
+      }
+      body {
+        display: grid;
+        place-items: center;
+        place-content: center;
+        margin: 0;
+        height: 100vh;
+        /* important learn it please */
+        margin-bottom: 6000px;
+      }
+      .back {
+        font-family: sans-serif;
+        font-size: 100px;
+        font-weight: bold;
+        color: rgb(255, 255, 255);
+        -webkit-text-stroke: 5px black;
+        text-shadow: 10px 10px 10px rgb(0, 0, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 1000px;
+        aspect-ratio: 1/1;
+        background: linear-gradient(
+          237deg,
+          red,
+          orange,
+          yellow,
+          blue,
+          cyan,
+          lightblue,
+          lightpink,
+          pink,
+          red,
+          orange,
+          yellow,
+          blue,
+          cyan
+        );
+        background-size: 800% 100%;
+        animation:
+          linegrad 8s linear infinite,
+          transform 8s linear infinite;
+      }
+      @keyframes linegrad {
+        0% {
+          background-position: 0% 0%;
+        }
+        100% {
+          background-position: 100% 0%;
+        }
+      }
+      @keyframes transform {
+        from {
+          /* if we add same property twice the last or the second property wins so don't use two properties */
+          transform: rotate(0deg) translate(0%) skew(0deg);
+        }
+        20% {
+          transform: rotate(360deg) translateX(100%) skewY(40deg) scale(2);
+        }
+        to {
+          transform: rotate(360deg) translateX(100%) skew(40deg) scale(2);
+        }
+      }
+      /* .front{
+        background:rgba(105, 105, 105, 0.5);
+        width:100em;
+        aspect-ratio:1/1;
+        position:absolute;
+      } */
+
+      .front {
+        background: conic-gradient(from var(--b) at 50% 50%, red, blue);
+        width: 900px;
+        aspect-ratio: 1/1;
+        position: absolute;
+        translate: 0% 500%; /*x axis, y axis*/
+        transition: transform 2s ease-in;
+        animation: box 2s linear infinite;
+      }
+      @property --b {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+      }
+      @keyframes box {
+        0% {
+          transform: rotateZ(0deg);
+          --b: 0deg;
+        }
+        100% {
+          transform: rotateZ(360deg);
+          --b: -360deg;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="back">Good Morning... </div>
+    <div class="front"></div>
+    <div class="front1"></div>
+  </body>
+</html>

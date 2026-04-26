@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial=scale=1.0" />
+  <meta
+    name="description"
+    content="A cool spinning loader made with CSS Houdini and custom properties"
+  />
+  <head>
+    <link rel="icon" type="image/jpg" href="tiger.jpg" />
+    <!-- /* rel="stylesheet" */ -->
+    <title>Transfomr 2</title>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        display: grid;
+        place-items: center;
+        place-content: center;
+        margin: 0;
+        height: 100vh;
+      }
+      div {
+        font-size: 50px;
+        color: white;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        background: linear-gradient(red, blue);
+        width: 400px;
+        aspect-ratio: 1/1;
+        animation: box 8s linear infinite;
+      }
+      @keyframes box {
+        /*rotate()+ve value means clockwire direction*/
+        to {
+          transform: skewY(360deg) rotateZ(360deg) translateX(200px)
+            translateY(200px);
+          background: linear-gradient(blue, red);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>Somethings Must be here</div>
+  </body>
+</html>
