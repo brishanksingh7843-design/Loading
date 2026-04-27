@@ -1,0 +1,99 @@
+.title {
+        font-family: Times; /*importnat  Arial, Georgia,fantasy,cursive,Courier, Cambria, monospace*/
+        font-size: 30px;
+        font-weight: bold;
+        font-style: italic; /*importnat can also write oblique*/
+        text-align: left;
+        width: 400px; /*importnat*/
+        line-height: 30px; /*important*/
+        margin-bottom: 0px; /* if the text below it is not comming more closer it is probably it's own margin not this about text*/
+        text-shadow: 8px 8px 7px rgba(111, 255, 0, 0.5);
+        transition: text-shadow 1s;
+      }
+      .title:hover {
+        text-shadow: 8px 8px 10px rgba(98, 0, 255, 0.7);
+      }
+      .date {
+        margin-top: 3px;
+        font-family: cursive;
+        margin-bottom: 0px;
+        transition: color 0.5s;
+      }
+      .date:hover {
+        color: blue;
+      }
+      /* Importnat terms to remember in css: button-selector,{}-declaration block, color-properties*/
+      .subtitle {
+        font-family: fantasy;
+        margin-top: 5px;
+        font-size: 17px;
+        font-weight: bold;
+        transition: all 1s ease-out;
+        /* values at ease-in-out could also be linear, ease, ease-in, ease-out.*/
+      }
+      .subtitle:hover {
+        color: cyan;
+        -webkit-text-stroke: 0.2px black; /*important*/
+      }
+      /* Importnat terms to remember in html: <button> opening tag(closing tag). element: something which include both opening tag and closing tag*/
+      .details {
+        width: 450px;
+        font-family: Gerogia;
+        transition:
+          text-shadow 0.5s,
+          color 0.5s;
+      }
+      .details:hover {
+        color: white;
+        text-shadow: 0 0 7px black; /*importnat*/
+      }
+      .apple {
+        font-family: Courier;
+        font-weight: bold;
+        font-size: 12px;
+        margin-top: 150px;
+        background-color: RED;
+        color: WHITESMOKE;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 25px;
+      }
+      a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: underline;
+        text-decoration-color: red;
+        transition:
+          text-decoration-color 0.2s,
+          text-decoration-thickness 1s;
+      }/*link elements are called void elements as they don't have closing tag. rel= relation*/
+      a:hover {
+        filter: blur(
+          0.5px
+        ); /*importnat if you use backdrop-filter:blur then it will not blur the thing but the background*/
+        text-decoration: UNDERLINE; /*VERY IMPORTNAT PLEASE LEARN*/
+        /*You can coverup the same styles into one selector(p{});*/
+        text-decoration-color: whitesmoke;
+        text-decoration-thickness: 1px; /*importnat*/
+        text-underline-offset: 2px; /*importnat*/
+      }
+      h3 {
+        color: white;
+        font-size: 20px;
+        background-color: rgb(85, 0, 255);
+        border: 5px solid rgb(0, 217, 255);
+        border-radius: 3px;
+        padding-left: 20px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        filter: blur(0px);
+        transition: filter 0.5s;
+      }
+      h3:hover {
+        filter: blur(10px);
+      }
+      body {
+        background-color: rgb(245, 245, 245);
+      }
+
+      /*HREF FULL FORM HYPERTEXT REFERENCE*/
