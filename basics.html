@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta property="og:title" content="My Epic JS Transformation" />
+    <meta property="og:image" content="BSlogo.png" />
+    <!-- the above property metas are used when you share your website to someone they appear which looks good... og=Open Graph -->
+    <meta name="author" content="Brishank Singh" />
+    <meta name="theme-color" content="lightblue" />
+    <!-- the about this only shows effect on moblies -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- this about thing tells the website to not to pretend to be a desktop and if it is a mobile  match the actual width of the moblie screen -->
+    <meta name="description" content="why you want to read this go away" />
+    <link rel="icon" type="image/png" href="BSlogo.png" />
+    <!-- rel=relationship,  href=hypertext reference -->
+    <title>Js</title>
+    <style>
+      button {
+        width: 150px;
+        aspect-ratio: 3/1;
+        /* aspect-ratio:2/1;
+        in this aspect ratio it is width/height and bec i have fixed the width value the width cannot change so the website things 2=150px that means 1=half of 150 so it decreases the height instead of doing the width 2x */
+        font-size: 16.5px;
+        font-family: "Lucida Sans";
+        border: 3px solid black;
+        border-style: dashed; /*double, dashed,dotted,none*/
+        cursor: progress; /*importnat*/
+        margin-right: 20px;
+        margin-left: 20px;
+        background: lightpink;
+        font-weight: bolder;
+        color: rgb(0, 0, 0);
+        /* -webkit-text-stroke:0.5px black; */
+        margin-bottom: 20px;
+        /* transition:transform 0.5s, background-color 0.5s, border 0.5s; */
+        /* transition:0.5s or....; */
+        transition: all 0.3s;
+      }
+      button:hover {
+        transform: scaleX(1.2);
+        border: 4px solid blue;
+        border-style: double;
+        background: lightblue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- onclick="console.log('Cart Quantity = ' + cartQuantity)" -->
+    <button
+      class="show"
+      onclick="console.log(`Cart Quantity = ${cartQuantity}`)"
+    >
+      Show Quantity
+    </button>
+    <button
+      class="add"
+      onclick="
+        cartQuantity += 1;
+        console.log(`Cart Quantity = ${cartQuantity}`);
+      "
+    >
+      Add to Cart
+    </button>
+    <button
+      class="add2"
+      onclick="
+        cartQuantity += 2;
+        console.log(`Cart Quantity = ${cartQuantity}`);
+      "
+    >
+      +2
+    </button>
+    <button
+      class="add3"
+      onclick="
+        cartQuantity += 3;
+        console.log(`Cart Quantity = ${cartQuantity}`);
+      "
+    >
+      +3
+    </button>
+    <button
+      onclick="
+        cartQuantity = 0;
+        console.log(`Cart Quantity = ${cartQuantity}`);
+      "
+    >
+      Reset
+    </button>
+    <script>
+      alert('hello');
+      let variable = 3;
+      console.log(variable);
+      let calc = 3 * 8;
+      console.log("3*8 = " + calc);
+      console.log("3*8/8 = " + calc / 8);
+      let result = calc + variable;
+      console.log("24+3 = " + result);
+      let somethin = "hello";
+      console.log(somethin);
+      console.log(typeof 2);
+      console.log(typeof "hello");
+      console.log(2 < 3);
+      console.log(typeof false);
+      let a = 1;
+      const b = 1;
+      var c = 1;
+      let cartQuantity = 0;
+    </script>
+  </body>
+</html>
