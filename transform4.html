@@ -2,94 +2,113 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="author" content="Brishank Singh" />
+    <meta name="theme-color" content="Blue" />
+    <meta
+      property="og:image"
+      content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZTwodOG-BpzQJZrVV8x4oa15Q-GJ4yfYBVA&s"
+    />
+    <meta property="og:title" content="Brishank-Asmit" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="you are a good person" />
     <link rel="icon" type="image/png" href="BSlogo.png" />
     <title>Transform</title>
     <style>
-      html{
-        scroll-behavior:smooth;
+      html {
+        scroll-behavior: smooth;
       }
-      body{
-        margin:0;
-        height:100vh;
-        display:grid;
-        place-items:center;
-        place-content:center;
-        margin-bottom:1000px;
-        margin-top:500px;
+      body {
+        margin: 0;
+        height: 100vh;
+        display: grid;
+        place-items: center;
+        place-content: center;
+        margin-bottom: 1000px;
+        margin-top: 500px;
       }
-      .top{
-        background:white url('BS-bg.png');
-        background-position:50% 50%;
-        background-repeat:no-repeat;
-        object-fit:contain;
-        width:300px;
-        aspect-ratio:1/1;
-        border-radius:150px;
-        translate:-50% -50%;
-        z-index:1;
+      .top {
+        background: white url("BS-bg.png");
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        object-fit: contain;
+        width: 300px;
+        aspect-ratio: 1/1;
+        border-radius: 150px;
+        translate: -50% -50%;
+        z-index: 1;
         animation: rotat 0.3s ease-in-out infinite;
       }
-      @keyframes rotat{
-        0%{
-          transform:rotate(-15deg);
+      @keyframes rotat {
+        0% {
+          transform: rotate(-15deg);
         }
-        50%{
-          transform:rotate(15deg);
+        50% {
+          transform: rotate(15deg);
         }
-        to{
-          transform:rotate(-15deg);
+        to {
+          transform: rotate(-15deg);
         }
       }
-      .middle{
-        background:conic-gradient(from var(--angle) at 50% 50%,red,blue,white,white);
+      .middle {
+        background: conic-gradient(
+          from var(--angle) at 50% 50%,
+          red,
+          blue,
+          white,
+          white
+        );
         /* var is variable used to take the value out from variable and place it */
-        width:300px;
-        aspect-ratio:1/1;
-        transform:translate(-50% ,-150%) scale(1.4);
-        border-radius:150px;
-        animation:conic 2s linear infinite;
+        width: 300px;
+        aspect-ratio: 1/1;
+        transform: translate(-50%, -150%) scale(1.4);
+        border-radius: 150px;
+        animation: conic 2s linear infinite;
       }
-      @property --angle{
-        syntax:'<angle>';
-        inherits:false;
+      @property --angle {
+        syntax: "<angle>";
+        inherits: false;
         /* it is inherits not inherit */
-        initial-value:0deg;
+        initial-value: 0deg;
       }
-      @keyframes conic{
-        from{
-          --angle:0deg;
-          filter:hue-rotate(0deg);
+      @keyframes conic {
+        from {
+          --angle: 0deg;
+          filter: hue-rotate(0deg);
         }
-        to{
-          filter:hue-rotate(360deg);
-          --angle:-360deg;
+        to {
+          filter: hue-rotate(360deg);
+          --angle: -360deg;
         }
       }
-      .bottom{
-        width:300px;
-        aspect-ratio:1/1;
-        background:conic-gradient(from var(--anglee) at 50% 50%,white,white,blue,red);
-        translate:-50% -250%;
-        transform:scale(1.8);
-        border-radius:150px;
-        z-index:-1;
-        animation:conical 3s linear infinite;
+      .bottom {
+        width: 300px;
+        aspect-ratio: 1/1;
+        background: conic-gradient(
+          from var(--anglee) at 50% 50%,
+          white,
+          white,
+          blue,
+          red
+        );
+        translate: -50% -250%;
+        transform: scale(1.8);
+        border-radius: 150px;
+        z-index: -1;
+        animation: conical 3s linear infinite;
       }
-      @property --anglee{
-        syntax:'<angle>';
-          inherits:false;
-          initial-value:0deg;
+      @property --anglee {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
       }
-      @keyframes conical{
-        0%{
-          --anglee:0deg;
-          filter:hue-rotate(0deg);
+      @keyframes conical {
+        0% {
+          --anglee: 0deg;
+          filter: hue-rotate(0deg);
         }
-        100%{
-          filter:hue-rotate(360deg);
-          --anglee:360deg;
+        100% {
+          filter: hue-rotate(360deg);
+          --anglee: 360deg;
         }
       }
     </style>
