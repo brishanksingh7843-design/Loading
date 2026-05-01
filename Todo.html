@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="theme-color" content="yellow" />
+    <meta name="author" content="Brishank Singh" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/jpg" href="sunflower.jpg" />
+    <meta name="description" content="Todo List" />
+    <meta property="og:title" content="Task List Maker" />
+    <meta
+      property="og:image"
+      content="https://lh4.googleusercontent.com/proxy/U5g4m35T0EWud452PLa6IMYGnnbG5jB7WToRjlc28lNOQUV97p9sq4axgaJk3o5INke6rHRyC1SaFziUjUXDzXOUNgYeE6DPlkk2y_fF00kVGxdCikRB32xxjprKsg"
+    />
+    <title>Task List</title>
+    <style>
+      /* Why border-box is Better
+      content-box (Default): Width + Padding + Border = Actual Size. (Frustrating).
+
+      border-box: Width = Actual Size (Padding and Border eat into the inside). (Logical). */
+
+      body {
+        margin: 0;
+        padding: 10px;
+        min-width: 260px;
+        background: radial-gradient(
+          farthest-corner at var(--ang) var(--ang),
+          grey,
+          black
+        );
+        height: 100vh;
+        animation: movee 10s ease-in-out infinite;
+      }
+      @property --ang {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 0%;
+      }
+      @keyframes movee {
+        from {
+          --ang: 0%;
+        }
+        50% {
+          --ang: 100%;
+        }
+        100% {
+          --ang: 0%;
+        }
+      }
+      .heading {
+        display: grid;
+        grid-template-columns: 3fr 2fr 1fr;
+        column-gap: 5px;
+        margin-bottom: 5px;
+        align-items: center;
+      }
+      .head {
+        height: 30px;
+        display: grid;
+        align-items: center;
+        padding: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      input {
+        min-width: 50px;
+        height: 85%;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        padding-left: 13px;
+        border: 1px solid black;
+        /* outline:1px solid blue; */
+      }
+      input:focus {
+        outline-offset: 1px;
+        outline: 1px solid white;
+      }
+      input::placeholder {
+        font-size: 10px;
+        /* color:blue; */
+      }
+      .add {
+        height: 25px;
+        background: rgb(0, 185, 0);
+        color: white;
+        border: none;
+        font-size: 10px;
+        transition: transform 0.3s;
+        cursor: pointer;
+        min-width: 55px;
+        font-family: courier;
+        font-weight: bold;
+      }
+      .add:active,
+      .delete:active {
+        transform: scale(0.9);
+      }
+      .task {
+        display: grid;
+        grid-template-columns: 3fr 2fr 1fr;
+        align-items: center;
+        column-gap: 5px;
+        row-gap: 5px;
+      }
+      .js {
+        min-height: 35px;
+        padding-left: 5px;
+        padding-right: 5px;
+        display: grid;
+        align-items: center;
+      }
+      .delete {
+        background: red;
+        color: white;
+        border: none;
+        height: 25px;
+        min-width: 55px;
+        margin: 0;
+        padding: 0;
+        font-family: courier;
+        font-weight: bold;
+        font-size: 10px;
+        /* font-weight:700;
+        letter-spacing:1px; */
+      }
+      p {
+        font-family: courier;
+        font-weight: bold;
+        background-clip: text;
+        color: white;
+      }
+      h1 {
+        color: transparent;
+        background: linear-gradient(to right, cyan, white, yellow, blue);
+        background-clip: text;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Task List Maker</h1>
+    <div class="heading">
+      <div class="head">
+        <input placeholder="Enter Task" class="t" onkeydown="keydown(event)" />
+      </div>
+      <div class="head">
+        <input type="date" class="d" onkeydown="keydown(event)" />
+      </div>
+      <div class="head">
+        <button class="add" onclick="pushValue()">Add</button>
+      </div>
+    </div>
+    <div class="task"></div>
+    <script>
+      function keydown(ev) {
+        if (ev.key === "Enter") {
+          pushValue();
+        }
+      }
+      let array = [];
+
+      function pushValue() {
+        const date = document.querySelector(".d");
+        const task = document.querySelector(".t");
+        if (date.value === "" || task.value === "") {
+          alert("Please both task and date!");
+          return;
+        }
+        array.push({ name: task.value, date: date.value });
+        task.value = "";
+        deploy();
+      }
+
+      function remove(index) {
+        array.splice(index, 1);
+        deploy();
+      }
+
+      function deploy() {
+        let page = "";
+        for (let i = 0; i < array.length; i++) {
+          const { name, date } = array[i];
+          const list = ` 
+          <div class='js'><p>${name}</p></div>  
+           <div class='js'><p>${date}</p> </div>  
+           <div class='js'><button class='delete' onclick='remove(${i});'>Delete</button> </div> `;
+          page += list;
+        }
+        document.querySelector(".task").innerHTML = page;
+      }
+      deploy();
+    </script>
+  </body>
+</html>
