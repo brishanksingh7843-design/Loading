@@ -152,13 +152,13 @@
     </div>
     <div class="task"></div>
     <script>
+      let array = JSON.parse(localStorage.getItem("value")) || [];
+
       function keydown(ev) {
         if (ev.key === "Enter") {
           pushValue();
         }
       }
-      let array = [];
-
       function pushValue() {
         const date = document.querySelector(".d");
         const task = document.querySelector(".t");
@@ -168,11 +168,13 @@
         }
         array.push({ name: task.value, date: date.value });
         task.value = "";
+        localStorage.setItem("value", JSON.stringify(array));
         deploy();
       }
 
       function remove(index) {
         array.splice(index, 1);
+        localStorage.setItem("value", JSON.stringify(array));
         deploy();
       }
 
