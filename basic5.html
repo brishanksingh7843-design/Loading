@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="cyan" />
+    <meta name="author" content="Brishank Singh" />
+    <!-- we should place title before the description as browsers look for it -->
+    <title>JS</title>
+    <meta name="description" content="JS Learning 05" />
+    <meta property="og:title" content="JS 05" />
+    <meta property="og:image" content="" />
+    <link rel="icon" type="image/png" href="BSlogo.png" />
+    <style>
+      body {
+        padding: 10px;
+        font-size: 15px;
+        font-family: Verdana;
+        background: radial-gradient(
+          farthest-corner at 10% 50%,
+          rgb(161, 161, 161),
+          black
+        );
+        background-repeat: no-repeat;
+        height: 100vh;
+      }
+      button {
+        width: 60px;
+        height: 21px;
+        font-weight: bold;
+        color: white;
+        background: black;
+        border: 1px solid white;
+      }
+      button:active {
+        transform: scale(0.9);
+      }
+      input {
+        width: 130px;
+        height: 20px;
+        caret-color: white; /*changes the cursor color*/
+        cursor: progress;
+        border: 1px double black;
+        border-radius: 10px;
+        padding-left: 10px;
+        box-shadow: 0 0 10px 1px rgb(0, 136, 136);
+        outline: none;
+        background: radial-gradient(red, blue);
+        color: white;
+      }
+      input::placeholder {
+        color: white;
+      }
+      input:focus {
+        background: radial-gradient(rgb(255, 0, 38), rgb(0, 0, 0));
+      }
+      p {
+        background: linear-gradient(
+          to right,
+          darkred,
+          red,
+          orange,
+          yellow,
+          rgb(0, 191, 255),
+          blue
+        );
+        display: inline-block;
+        background-clip: text;
+        color: transparent;
+        font-weight: bolder;
+      }
+      h1 {
+        font-size: 17px;
+        font-family: courier;
+      }
+      .delete {
+        background: red;
+        margin-right: 65%;
+      }
+      .todofinal-button {
+        background: green;
+        position: absolute;
+        right: 0;
+        margin-right: 80px;
+      }
+      .todofinal-input {
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p>Todo List Practice 1</p>
+    </div>
+    <input
+      class="todo1-input"
+      placeholder="Todo-1 name"
+      onkeydown="todo1key(event)"
+    />
+    <button class="todo1-button" onclick="todo1()">Add</button>
+
+    <div style="margin-top: 70px">
+      <p>Todo List Practice 2</p>
+    </div>
+
+    <input
+      class="todo2-input"
+      placeholder="Todo-2 name"
+      onkeydown="todo2key(event)"
+    />
+    <button class="todo2-button" onclick="todo2()">Add</button>
+    <div class="todo2-div"></div>
+
+    <div style="margin-top: 100px"><p>Todo Final</p></div>
+    <input
+      placeholder="Enter List"
+      class="todofinal-input"
+      onkeydown="todofinalkey(event)"
+    />
+    <input type="date" class="todofinal-date" />
+    <button class="todofinal-button" onclick="todofinal()">Add</button>
+    <div class="todofinal-div"></div>
+    <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+    <script>
+      let todo1array = [];
+      function todo1key(ev) {
+        if (ev.key === "Enter") {
+          todo1();
+        }
+      }
+
+      function todo1() {
+        const todo1input = document.querySelector(".todo1-input");
+        todo1array.push(todo1input.value);
+        console.log(todo1array);
+        todo1input.value = "";
+      }
+
+      let todo2array = [];
+      let todo2lists = "";
+      function todo2key(ev) {
+        if (ev.key === "Enter") {
+          todo2();
+        }
+      }
+
+      function todo2() {
+        const todo2input = document.querySelector(".todo2-input");
+        todo2array.push(todo2input.value);
+        for (let i = 0; i < todo2array.length; i++) {
+          const each = todo2array[i];
+          const lis = `<h1>${i + 1}) ${each}</h1>`;
+          todo2lists += lis;
+        }
+        console.log(todo2lists);
+        document.querySelector(".todo2-div").innerHTML = todo2lists;
+        todo2lists = "";
+        todo2input.value = "";
+      }
+
+      let todofinalarray = [];
+
+      function todofinalkey(ev) {
+        if (ev.key === "Enter") {
+          todofinal();
+        }
+      }
+
+      function todofinal() {
+        const todofinalinput = document.querySelector(".todofinal-input");
+        const todofinaldate = document.querySelector(".todofinal-date");
+        if (todofinalinput.value === "" || todofinaldate.value === "") {
+          alert("Please Enter both task and date");
+          return;
+        } // not adding empty elements
+        // todofinalarray.name.push(todofinalinput.value);
+        // todofinalarray.dueDate.push(todifinadate.value);
+        todofinalarray.push({
+          name: todofinalinput.value,
+          dueDate: todofinaldate.value,
+        });
+        todofinalinput.value = "";
+        todorender();
+      }
+      todorender();
+      function todorender() {
+        let htmlist = "";
+
+        for (let i = 0; i < todofinalarray.length; i++) {
+          const todoObject = todofinalarray[i];
+          // const nam = todoObject.name;
+          // const date = todoObject.dueDate;
+          const { name, dueDate } = todoObject; //destructor
+          const lis = `
+          <h1 >${i + 1}) 
+             ${name} --- ${dueDate}
+            <button style='position:absolute;
+        right:0;
+        margin-right:80px;' class='delete' onclick='tododelete(${i});'>
+              Delete
+              </button>`;
+          htmlist += lis;
+        }
+        document.querySelector(".todofinal-div").innerHTML = htmlist;
+      }
+
+      function tododelete(index) {
+        todofinalarray.splice(index, 1);
+        todorender();
+      }
+
+      function learnarray() {
+        let myarray = [1, 3, 4, "hello", 4.4];
+        console.log(myarray);
+        console.log(myarray[0]); //myarray(index); to get the specific value
+        console.log(myarray[3]);
+        console.log(typeof myarray); //array is object
+        console.log(typeof myarray[3]); // at index 3 the typeof value at that index
+        myarray[0] = 99;
+        console.log(myarray);
+        console.log(myarray.length);
+        myarray.push(500); //to add a new value in array
+        console.log(myarray);
+        myarray.splice(0, 2); // slipce( (index), (how many values after it) );
+        console.log(myarray);
+      }
+    </script>
+  </body>
+</html>
