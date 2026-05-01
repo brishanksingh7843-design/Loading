@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Brishank Singh" />
+    <meta name="description" content="Something here" />
+    <meta name="theme-color" content="white" />
+    <meta property="og:title" content="Brish" />
+    <meta
+      property="og:image"
+      content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZTwodOG-BpzQJZrVV8x4oa15Q-GJ4yfYBVA&s"
+    />
+    <link rel="icon" rel="image/png" href="BSlogo.png" />
+    <title>js Learning</title>
+    <style>
+      body {
+        background: radial-gradient(
+          farthest-corner at 50% 0%,
+          rgba(0, 0, 0, 0.74),
+          black
+        );
+        height: 100vh;
+        overflow-y: hidden;
+      }
+      a {
+        color: white;
+        transition: color 0.3s;
+      }
+      a:hover {
+        color: blue;
+      }
+      a:active {
+        color: red;
+      }
+      button {
+        width: 230px;
+        aspect-ratio: 3/1;
+        margin: 20px;
+        font-family: sans-serif;
+        font-size: 25px;
+        font-weight: 700;
+        border-radius: 40px 0 40px 0;
+        background: linear-gradient(
+          15deg,
+          cyan 1%,
+          red,
+          blue,
+          red,
+          blue,
+          cyan,
+          red,
+          blue
+        );
+        background-size: 100% 800%;
+        color: white;
+        animation: n 10s linear infinite;
+        vertical-align: top;
+        transition:
+          font-size 0.3s,
+          transform 0.2s; /* you have to put comma ,,,, */
+        border: 5px solid white;
+        border-style: groove;
+        /* dashed dotted double solid */
+        /* inset outset groove  rdige */
+        /* clip-path:polygon(0% 0%, 100% 50%, 0% 100%); */
+        /* clip-path:polygon(0% 50%, 50% 0%, 100% 50%, 50% 100%); */
+        /* Only works if your button is exactly 100px by 100px */
+        /* clip-path: path("M 0 50 L 50 0 L 100 50 L 50 100 Z"); */
+      }
+      button:hover {
+        border-style: outset;
+        font-size: 30px;
+        transform: scaleX(1.1);
+      }
+      button:hover::after {
+        content: "-";
+      }
+      button:hover::before {
+        content: "-";
+      }
+      button:active {
+        transform: scale(0.9);
+      }
+      @keyframes n {
+        from {
+          background-position: 0% 0%;
+          /* clip-path:polygon(0% 0%, 0% 100%); */
+        }
+        to {
+          background-position: 0% 100%;
+          /* clip-path:polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); */
+        }
+      }
+      h1 {
+        display: block;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body onload="onrefresh()">
+    <h1
+      style="
+        display: block;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        font-size: 40px;
+      "
+    >
+      Rock Paper Scissor
+    </h1>
+    <button onclick="ab('stone')">Stone</button>
+    <button onclick="ab('paper')">Paper</button>
+    <button onclick="ab('scissor')">Scissor</button>
+    <!-- style="position: absolute; top: 50%; left: 50%; translate: -50% -50%"  i used it in reset button but no need-->
+
+    <!-- score.win = 0;
+        score.loose = 0;
+        score.tie = 0; chatgpt said that it is old way and we can directly reassign the object -->
+
+    <h1 style="margin-bottom: 150px" class="r">Result</h1>
+
+    <h1 style="display: inline-block; vertical-align: top">You</h1>
+
+    <div class="yourcomputer" style="display: inline-block"></div>
+
+    <h1 style="display: inline-block; vertical-align: top">Computer</h1>
+
+    <h1 class="sco" style="margin-top: 100px">Win:0, Loose:0, Tie:0</h1>
+
+    <button
+      style="display: block; margin-top: 100px"
+      onclick="
+        score = { win: 0, loose: 0, tie: 0 };
+        console.log(
+          `Wins= ${score.win}, Loose= ${score.loose}, Ties= ${score.tie}`,
+        );
+        localStorage.removeItem('localscore');
+        onscreenreset();
+      "
+    >
+      Reset
+    </button>
+    <a
+      href="sps2.html"
+      style="font-size: 30px; display: block; padding-top: 50px"
+      target="_blank"
+      >Click here for better view Bro</a
+    >
+    <script>
+      // alert("hello");
+      // some builtin objects are console Math JSON  document object model(dom).... doucment(object).body(object).innerHTML(property)....etc
+      // const score = {
+      //   win: 0, //colon is used only here in objects nowhere else so remember
+      //   loose: 0,
+      //   tie: 0,
+      // };
+      console.log("Hello Everyone Let's Start The Game :-");
+      let score = JSON.parse(localStorage.getItem("localscore")) || {
+        win: 0,
+        loose: 0,
+        tie: 0,
+      };
+      // when the first time the code runs the localStorage will be false/null so the or operator will make the socre object and give it default values.... and next time there will be a value in local Storage so will will work
+      console.log(score);
+      // null behaves like false value
+      // localStorage.getItem('score'); we don't want string so we will directly change it to object as we call it
+      // we can add other objecs and functions inside objects called nested objectssss
+      let ran = 0;
+      let comp = "";
+      let your = "";
+      let result = "";
+      function ab(ym = "") {
+        your = ym;
+        ran = Math.random();
+        if (ran < 1 / 3) {
+          comp = "stone";
+        } else if (ran < 2 / 3) {
+          comp = "paper";
+        } else {
+          comp = "scissor";
+        }
+        console.log(`Your Move= ${your}, Computer Move= ${comp}`);
+        check();
+      }
+      function check() {
+        if (your === comp) {
+          result = "Tie";
+          score.tie += 1;
+        } else if (your === "stone" && comp === "scissor") {
+          result = "Win";
+          score.win += 1;
+        } else if (your === "paper" && comp === "stone") {
+          result = "Win";
+          score.win += 1;
+        } else if (your === "scissor" && comp === "paper") {
+          result = "Win";
+          score.win += 1;
+        } else {
+          result = "Loose";
+          score.loose += 1;
+        }
+        let yours = "";
+        if (your === "stone") {
+          yours = "rockk";
+        } else if (your === "paper") {
+          yours = "paperr";
+        } else {
+          yours = "scissorr";
+        }
+
+        let computerr = "";
+        if (comp === "stone") {
+          computerr = "rockk";
+        } else if (comp === "paper") {
+          computerr = "paperr";
+        } else {
+          computerr = "scissorr";
+        }
+        window.document.querySelector(".sco").innerText =
+          `Win:${score.win}, Loose:${score.loose}, Tie:${score.tie}`;
+        document.querySelector(".yourcomputer").innerHTML =
+          `<img src='${yours}.png'><img src='${computerr}.png'>`;
+        console.log(
+          `The result is: ${result}\nWins= ${score.win}, Loose= ${score.loose}, Ties= ${score.tie}`,
+        );
+        document.querySelector(".r").innerText = result;
+        // alert(
+        //   `Your Move= ${your}, Computer Move= ${comp}\nThe result is: ${result}\nWins= ${score.win}, Loose= ${score.loose}, Ties= ${score.tie}`,
+        // );
+        localStorage.setItem("localscore", JSON.stringify(score));
+      }
+      // localStorage.setItem("localscore", JSON.stringify(score)); i kept this at last and it was only running once so my website didn't work as expected so i have to move it in check();
+
+      //JSON JavaScript Object Notation  JSON is better than JavaScript Object notation bec json is unversal
+
+      //to change object into string we can use JSON.stringify('objec name here'); eg: JSON.stringify(score);
+
+      //to change the string back to object we use JSON.parse('object name here'); eg: JSON.parse(jsonString);
+
+      // to give values to it we use;  localStorage.setItem(name,string-value); eg: localStorage('message','hello');
+
+      // to get values out of it we use: localStorage.getItem('name'); eg: localStorage('message');
+
+      //to remove anything name from localStorage we use localStorage.removeItem('name');
+
+      // localStroage is a importnat thing as i stores values inside itself and dosen't get deleted on page refresh
+
+      // window.onload = onrefresh();{
+      //   console.log(
+      //   "The page is fully loaded")
+      // }; this is also another way to do itittiti....
+
+      function onrefresh() {
+        document.querySelector(".sco").innerText =
+          `Win:${score.win}, Loose:${score.loose}, Tie:${score.tie}`;
+      }
+
+      function onscreenreset() {
+        document.querySelector(".sco").innerText = "Win:0, Loose:0, Tie:0";
+      }
+    </script>
+  </body>
+</html>
