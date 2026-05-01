@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="blue" />
+    <meta name="author" content="Brishank Singh" />
+    <link rel="icon" type="image/png" href="BSlogo.png" />
+    <meta name="description" content="Advanced Features Used" />
+    <meta property="og:title" content="something" />
+    <meta property="og:image" content="" />
+    <title></title>
+    <style>
+      body {
+        display: grid;
+        place-items: center;
+        place-content: center;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .main {
+        height: 525px;
+        aspect-ratio: 2/1;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 40px 1fr 40px;
+        row-gap: 10px;
+        box-sizing: border-box;
+        padding: 5px;
+        border: 1px dashed black;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+      .middle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+      .bottom {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        /* box-sizing:border-box; */
+        padding: 1px;
+        column-gap: 10px;
+        /* position:absolute;
+        bottom:0;
+        left:0;
+        right:0; */
+      }
+      input {
+        box-sizing: border-box;
+        padding-left: 20px;
+        border-radius: 10px;
+        font-size: 18px;
+        background-color: black;
+        color: white;
+        caret-color: white;
+        cursor: pointer;
+      }
+      input::placeholder {
+        font-size: 15px;
+        color: lightgrey;
+      }
+      input:focus {
+        /* outline:3px dashed black; */
+        outline: none;
+        /* outline-offset:1px; */
+      }
+      button {
+        font-size: 20px;
+        color: white;
+        background: black;
+        font-weight: bold;
+        letter-spacing: 1px;
+        transition: transform 0.1s;
+        cursor: pointer;
+      }
+      button:active {
+        transform: scale(0.9);
+      }
+      h1 {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Live Animal Fetcher</h1>
+    <div class="main">
+      <div class="top">Animal</div>
+      <div class="middle">
+        <img
+          src=""
+          id="inage"
+          style="
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            display: none;
+          "
+        />
+      </div>
+      <div class="bottom">
+        <input
+          placeholder="Enter the name of animal"
+          id="animalInput"
+          onkeydown="checkey(event)"
+        /><button onclick="getImage()">Search</button>
+      </div>
+    </div>
+    <script>
+      function checkey(e) {
+        if (e.key === "Enter") {
+          getImage();
+        }
+      }
+      async function getImage() {
+        const topText = document.querySelector(".top");
+        const image = document.querySelector("#inage");
+        const input = document.querySelector("#animalInput");
+        if (input.value === "") {
+          alert("Please provide the name of animal...");
+          return;
+        }
+        const animal = input.value;
+        console.log(animal);
+
+        topText.innerText = `Searching for ${animal} ...`;
+
+        // With this specific URL, we don't even need a complex fetch!
+        // We just update the 'src' and the browser does the rest.
+        image.src = `https://loremflickr.com/640/480/${animal}`;
+
+        image.onload = () => {
+          image.style.display = "block";
+          topText.innerText = animal.toUpperCase();
+        };
+
+        input.value = "";
+      }
+    </script>
+  </body>
+</html>
