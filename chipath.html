@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="red" />
+    <meta name="author" content="Brishank Singh" />
+    <meta name="description" content="Clip Path learning" />
+    <meta property="og:title" content="CSS Clip-Path" />
+    <meta
+      property="og:image"
+      content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZTwodOG-BpzQJZrVV8x3oa15Q-GJ3yfYBVA&s"
+    />
+    <title>Clip Path</title>
+    <style>
+      /* svg scalable vector graphics */
+      html {
+        scroll-behavior: smooth;
+      }
+      /* clip-path:circle(radius, x-axis y-axis); */
+      /* clip-path:ellips(x-axis radius y-axis radius, (x-axis position) (y-axis position) ); */
+      /* clip-path: inset(top right bottom left round (border-radius)); you can give double values of radius and change the opposite radius */
+      /* clip-path:polygon(xy,xy,xy,xy,xy,xy,xy.....); */
+      /* clip-path:path("M x,y L x,y L x,y L x,y Z"); M starting point, Z ending point, L line, if A so arc*/
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        margin-bottom: 500px;
+      }
+      .parent {
+        width: 200px;
+        aspect-ratio: 1/1;
+        background: rgba(0, 0, 0, 0.3);
+        perspective: 1300px;
+        /* perspective-origin:center;default value always applied to parent element */
+        perspective-origin: bottom; /*value bottom right top left etc*/
+        transform: perspective(800px) rotateY(70deg);
+        /* transform-style:flat;default value only applied to parent element */
+        transform-style: preserve-3d; /*add rotate for better view*/
+      }
+      .child {
+        width: 200px;
+        background: lightpink;
+        aspect-ratio: 1/1;
+        z-index: -1;
+        animation: new 3s linear infinite;
+        /* transform-origin:center; no use it's default */
+        transform-origin: left; /*left and right will not work if it is rotating on Y axis basic thing*/
+      }
+      @keyframes new {
+        to {
+          transform: rotateY(360deg);
+        }
+      }
+      .loader,
+      .loader2,
+      .loader3,
+      .loader4 {
+        position: absolute;
+        margin-top: 50%;
+        width: 200px;
+        aspect-ratio: 1/1;
+        background: conic-gradient(
+          from var(--ang) at 35% 50%,
+          white,
+          blue,
+          red,
+          orange,
+          yellow,
+          white
+        );
+      }
+      @property --ang {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+      }
+      .loader2 {
+        translate: -50% -50%;
+        clip-path: circle(50px at 50% 50%);
+        transform-origin: bottom right;
+        animation:
+          n 3s linear infinite,
+          a 3s linear infinite; /*if you don't write infinite the animation will onlly work oncee*/
+      }
+      @keyframes n {
+        0% {
+          --ang: 0deg;
+        }
+        100% {
+          --ang: -720deg;
+          filter: hue-rotate(360deg);
+        }
+      }
+      @keyframes a {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes nn {
+        to {
+          transform: rotateZ(405deg);
+        }
+      }
+      @keyframes nnn {
+        to {
+          transform: rotate(455deg);
+        }
+      }
+      @keyframes nnnn {
+        to {
+          transform: rotate(510deg);
+        }
+      }
+      .loader {
+        translate: 50% 50%;
+        clip-path: circle(40px at 50% 50%);
+        transform-origin: top left;
+        animation:
+          n 3s linear infinite,
+          nnn 3s linear infinite;
+        transform: rotate(95deg);
+      }
+      .loader3 {
+        translate: 50% -50%;
+        transform-origin: bottom left;
+        animation:
+          n 3s linear infinite,
+          nnnn 3s linear infinite;
+        clip-path: circle(35px at center);
+        transform: rotateZ(150deg);
+      }
+      .loader4 {
+        translate: -50% 50%;
+        transform-origin: top right;
+        animation:
+          n 3s linear infinite,
+          nn 3s linear infinite;
+        clip-path: circle(45px at center);
+        transform: rotateZ(45deg);
+      }
+      h1{
+        margin-top:35px;
+        position:relative;
+        transform:translateY(-500px);
+        font-size:35px;
+        font-family:sans-serif;
+      }
+      h1:after{
+        height:10px;
+        background:linear-gradient(45deg,blue,red,cyan,violet,indigo,yellow,orange,blue,red);
+        background-size:500% 100%;
+        left:0;
+        width:0%;
+        content:'';
+        display:block;
+        position:absolute;
+        animation:mov 5s linear infinite;
+        transition:width 1s ease-in-out;
+        border-radius:50%;
+      }
+      h1:hover::after{
+        width:100%;
+      }
+      @keyframes mov{
+        from{
+          background-position:0% 0%;
+        }
+        to{
+          background-position:100% 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent"><div class="child"></div></div>
+    <div class="loader"></div>
+    <div class="loader2"></div>
+    <div class="loader3"></div>
+    <div class="loader4"></div>
+    <h1>This Underline is unique</h1>
+    <script></script>
+  </body>
+</html>
