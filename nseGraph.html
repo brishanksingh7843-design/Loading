@@ -205,6 +205,12 @@
         // const local=nesData.records.data.CE.find(item => item.strikePrice ===2550);
         const table = document.querySelector(".livelist");
         let html = "";
+        let CEbuypertotal = 0;
+        let CEsellpertotal = 0;
+        let PEbuypertotal = 0;
+        let PEsellpertotal = 0;
+        let PEtotaltotal = 0;
+        let CEtotaltotal = 0;
 
         for (let i = 0; i <= 20; i++) {
           document.querySelector(".bottom").innerText =
@@ -217,13 +223,19 @@
           const CEbuy = specific.CE.totalBuyQuantity;
           const CEsell = specific.CE.totalSellQuantity;
           const CEtotal = CEbuy + CEsell;
-          const CEbuyper = Math.round((CEbuy / CEtotal) * 1000) / 1000;
-          const CEsellper = Math.round((CEsell / CEtotal) * 1000) / 1000;
+          const CEbuyper = Math.round((CEbuy / CEtotal) * 10000) / 100;
+          const CEsellper = Math.round((CEsell / CEtotal) * 10000) / 100;
           const PEbuy = specific.PE.totalBuyQuantity;
           const PEsell = specific.PE.totalSellQuantity;
           const PEtotal = PEbuy + PEsell;
-          const PEbuyper = Math.round((PEbuy / PEtotal) * 1000) / 1000;
-          const PEsellper = Math.round((PEsell / PEtotal) * 1000) / 1000;
+          const PEbuyper = Math.round((PEbuy / PEtotal) * 10000) / 100;
+          const PEsellper = Math.round((PEsell / PEtotal) * 10000) / 100;
+          CEbuypertotal += CEbuyper;
+          CEsellpertotal += CEsellper;
+          PEbuypertotal += PEbuyper;
+          PEsellpertotal += PEsellper;
+          PEtotaltotal += PEtotal;
+          CEtotaltotal += CEtotal;
 
           //     const each = `
           // <tr>
@@ -255,6 +267,23 @@
         <td class="peD">${PEsell}</td>
         <td class="peD">${PEsellper}%</td>
         <td class="peD" style='background:black;color:white;'>${PEtotal}</td>
+      </tr>`;
+          } else if (i === 20) {
+            CEbuypertotal = Math.round((CEbuypertotal / 21) * 1000) / 1000;
+            CEsellpertotal = Math.round((CEsellpertotal / 21) * 1000) / 1000;
+            PEbuypertotal = Math.round((PEbuypertotal / 21) * 1000) / 1000;
+            PEsellpertotal = Math.round((PEsellpertotal / 21) * 1000) / 1000;
+            CEtotaltotal = Math.round(CEtotaltotal / 21);
+            PEtotaltotal = Math.round(PEtotaltotal / 21);
+            each = `
+      <tr>
+        <td class="sD">Average</td>
+        <td class="ceD" colspan='2'>${CEbuypertotal}%</td>
+        <td class="ceD" colspan='2'>${CEsellpertotal}%</td>
+        <td class='ceD' >${CEtotaltotal}</td>
+        <td class="peD" colspan='2'>${PEbuypertotal}%</td>
+        <td class="peD" colspan='2'>${PEsellpertotal}%</td>
+        <td class='peD' >${PEtotaltotal}</td>
       </tr>`;
           } else {
             each = `
