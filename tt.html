@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Brishank Singh" />
+    <meta name="theme=color" content="Indigo" />
+    <link rel="icon" type="image/png" href="BSlogo.png" />
+    <meta name="description" content="Nifty Trading Table (NTT)" />
+    <meta property="og:title" content="Stock Market Table" />
+    <meta
+      property="og:image"
+      content="https://lh4.googleusercontent.com/proxy/U5g4m35T0EWud452PLa6IMYGnnbG5jB7WToRjlc28lNOQUV97p9sq4axgaJk3o5INke6rHRyC1SaFziUjUXDzXOUNgYeE6DPlkk2y_fF00kVGxdCikRB32xxjprKsg"
+    />
+    <title>Stock Market</title>
+    <style>
+      body {
+        background: linear-gradient(to bottom left, rgb(90, 90, 90), white);
+        color: black;
+        padding: 20px;
+        font-family: "Trebuchet MS";
+        padding-bottom: 40px;
+      }
+      table {
+        table-layout: fixed;
+        width: 100%;
+        height: 40px;
+        min-width: 610px;
+        caption-side: top;
+        /* border-collapse: collapse; */
+        cursor: pointer;
+        font-size: 13px;
+        /* color:white; */
+      }
+      caption {
+        font-size: 25px;
+        background: linear-gradient(to right, red, blue);
+        background-clip: text;
+        color: transparent;
+        transform: translateY(-10px);
+        font-weight: bold;
+      }
+      th {
+        color: white;
+      }
+      th,
+      td {
+        text-align: center;
+        /* border: 2px solid grey; */
+        transition:
+          color 0.2s,
+          background-color 0.2s;
+        /* border-radius:20px; */
+      }
+      td {
+        font-size: 15px;
+      }
+      td:hover {
+        background: grey;
+        color: white;
+      }
+      .ceHead,
+      .ceH2 {
+        background: #1565c0;
+      }
+      .peHead,
+      .peH2 {
+        background: coral;
+      }
+      .strikeHead,
+      .sH2 {
+        background: lightslategrey;
+      }
+      .ceD {
+        background: lightblue;
+        border-radius: 20px;
+      }
+      .peD {
+        background: lightpink;
+        border-radius: 20px;
+      }
+      .sD {
+        background: rgb(180, 188, 196);
+      }
+      .livelist {
+        translate: 0px -1px;
+        height: 100%;
+        cursor: pointer;
+      }
+      .strikeHead {
+        font-size: 15px;
+      }
+      div {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        height: 30px;
+        width: 300px;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      textarea {
+        flex: 3;
+        box-sizing: border-box;
+        font-size: 10px;
+      }
+      button {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <table>: The main container.
+     <thead>: The "brain" (header section).
+     <tbody>: The "body" (the data rows).
+     <tr>: Table Row (a horizontal line).
+     <th>: Table Header (bold, centered by default).
+     <td>: Table Data (the standard cell). -->
+
+    <!-- <div class="table">
+      <div class="strike">Strike</div>
+      <div>
+        <div class="ce"></div>
+      </div>
+      <div></div>
+    </div> -->
+    <h1 class="bottom"></h1>
+    <div>
+      <textarea></textarea
+      ><button onclick="new1()">Enter</button>
+    </div>
+    <table>
+      <caption>
+        Trading Graph
+      </caption>
+      <tr>
+        <th rowspan="2" class="strikeHead">Strike</th>
+        <th colspan="5" class="ceHead">CE</th>
+        <th colspan="5" class="peHead">PE</th>
+      </tr>
+      <tr>
+        <th class="ceH2">Buy</th>
+        <th class="ceH2">%</th>
+        <th class="ceH2">Sell</th>
+        <th class="ceH2">%</th>
+        <th class="ceH2">Total</th>
+        <th class="peH2">Buy</th>
+        <th class="peH2">%</th>
+        <th class="peH2">Sell</th>
+        <th class="peH2">%</th>
+        <th class="peH2">Total</th>
+      </tr>
+    </table>
+    <table class="livelist">
+      <tr class="row-0">
+        <td class="sD">value</td>
+        <td class="ceD">value</td>
+        <td class="ceD">value</td>
+        <td class="ceD">value</td>
+        <td class="ceD">value</td>
+        <td class="ceD">Total</td>
+        <td class="peD">value</td>
+        <td class="peD">value</td>
+        <td class="peD">value</td>
+        <td class="peD">value</td>
+        <td class="peD">Total</td>
+      </tr>
+    </table>
+    <script>
+      let nesData = "";
+      let strike = [];
+
+      async function new1() {
+        try {
+          // FIX 1: Remove await from JSON.parse
+          nesData = JSON.parse(document.querySelector("textarea").value);
+
+          // FIX 2: Clear the strike array before making new ones
+          strike = [];
+
+          makeStrikes(nesData.records.underlyingValue);
+          apply(); // Removed await as these aren't Promises
+        } catch (error) {
+          console.log(error);
+          document.querySelector(".bottom").innerText =
+            "Failed To Accept - Check JSON format";
+        }
+      }
+
+      function makeStrikes(s) {
+        let strikeBase = Math.round(s / 50) * 50;
+        strikeBase = strikeBase - 50 * 10;
+
+        for (let i = 1; i <= 21; i++) {
+          strike.push(strikeBase);
+          strikeBase += 50;
+        }
+      }
+
+      async function apply() {
+        const table = document.querySelector(".livelist");
+        let html = "";
+
+        for (let i = 0; i <= 20; i++) {
+          document.querySelector(".bottom").innerText = "Processing Data...";
+
+          // FIX 3: Removed await from .find (it's a standard array method)
+          const specific = nesData.records.data.find(
+            (item) => item.strikePrice === strike[i],
+          );
+
+          // FIX 4: Skip if data for this strike is missing (prevents crashes)
+          if (!specific || !specific.CE || !specific.PE) continue;
+
+          const livestrike = specific.strikePrice;
+          const CEbuy = specific.CE.totalBuyQuantity;
+          const CEsell = specific.CE.totalSellQuantity;
+          const CEtotal = CEbuy + CEsell;
+
+          // Safety check for division by zero
+          const CEbuyper =
+            CEtotal > 0 ? Math.round((CEbuy / CEtotal) * 100) : 0;
+          const CEsellper =
+            CEtotal > 0 ? Math.round((CEsell / CEtotal) * 100) : 0;
+
+          const PEbuy = specific.PE.totalBuyQuantity;
+          const PEsell = specific.PE.totalSellQuantity;
+          const PEtotal = PEbuy + PEsell;
+          const PEbuyper =
+            PEtotal > 0 ? Math.round((PEbuy / PEtotal) * 100) : 0;
+          const PEsellper =
+            PEtotal > 0 ? Math.round((PEsell / PEtotal) * 100) : 0;
+
+          let style = i === 10 ? "style='background:black;color:white;'" : "";
+
+          html += `
+      <tr>
+        <td class="sD" ${style}>${livestrike}</td>
+        <td class="ceD">${CEbuy.toLocaleString()}</td>
+        <td class="ceD">${CEbuyper}%</td>
+        <td class="ceD">${CEsell.toLocaleString()}</td>
+        <td class="ceD">${CEsellper}%</td>
+        <td class="ceD" ${style}>${CEtotal.toLocaleString()}</td>
+        <td class="peD">${PEbuy.toLocaleString()}</td>
+        <td class="peD">${PEbuyper}%</td>
+        <td class="peD">${PEsell.toLocaleString()}</td>
+        <td class="peD">${PEsellper}%</td>
+        <td class="peD" ${style}>${PEtotal.toLocaleString()}</td>
+      </tr>`;
+        }
+        table.innerHTML = html;
+        document.querySelector(".bottom").innerText = "Connected";
+      }
+    </script>
+  </body>
+</html>
