@@ -97,19 +97,15 @@
       div {
         position: relative;
         z-index: 2;
-        display: flex;
-        height: 30px;
+        height: 42px;
         width: 300px;
-        flex-direction: row;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        row-gap: 5px;
       }
       textarea {
-        flex: 3;
         box-sizing: border-box;
         font-size: 10px;
-      }
-      button {
-        flex: 1;
       }
     </style>
   </head>
@@ -129,7 +125,15 @@
       <div></div>
     </div> -->
     <h1 class="bottom"></h1>
-    <div><textarea></textarea><button onclick="new1()">Enter</button></div>
+    <div>
+      <textarea></textarea><button onclick="new1()">Enter</button
+      ><a
+        style="display: block"
+        href="https://www.nseindia.com/option-chain"
+        target="_blank"
+        >Click Here
+      </a>
+    </div>
     <table>
       <caption>
         Trading Graph
